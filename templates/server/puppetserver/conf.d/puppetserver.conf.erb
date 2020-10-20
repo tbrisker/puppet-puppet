@@ -63,7 +63,7 @@ jruby-puppet: {
     max-requests-per-instance: <%= @server_max_requests_per_instance %>
 <%- if scope.function_versioncmp([@server_puppetserver_version, '2.2']) >= 0 -%>
 
-    # (optional) Authorize access to Puppet master endpoints via rules
+    # (optional) Authorize access to Puppet server endpoints via rules
     # specified in the legacy Puppet auth.conf file (if true) or via rules
     # specified in the Puppet Server HOCON-formatted auth.conf (if false or not
     # specified).

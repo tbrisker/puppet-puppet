@@ -41,7 +41,7 @@
 #                                           used as the provider then this setting is
 #                                           required.
 #
-# $port::                                   Override the port of the master we connect to.
+# $port::                                   Override the port of the server we connect to.
 #
 # $listen::                                 Should the puppet agent listen for connections.
 #
@@ -145,7 +145,7 @@
 #                                           configuration.
 #
 # $use_srv_records::                        Whether DNS SRV records will be used to resolve
-#                                           the Puppet master
+#                                           the Puppet server
 #
 # $srv_domain::                             Search domain for SRV records
 #
@@ -167,7 +167,7 @@
 # $client_package::                         Install a custom package to provide
 #                                           the puppet client
 #
-# $puppetmaster::                           Hostname of your puppetmaster (server
+# $puppetmaster::                           Hostname of your puppetserver (server
 #                                           directive in puppet.conf)
 #
 # $prerun_command::                         A command which gets excuted before each Puppet run
@@ -198,40 +198,40 @@
 #
 # == puppet::server parameters
 #
-# $server::                                 Should a puppet master be installed as well as the client
+# $server::                                 Should a puppet server be installed as well as the client
 #
-# $server_user::                            Name of the puppetmaster user.
+# $server_user::                            Name of the puppetserver user.
 #
-# $server_group::                           Name of the puppetmaster group.
+# $server_group::                           Name of the puppetserver group.
 #
 # $server_dir::                             Puppet configuration directory
 #
-# $server_ip::                              Bind ip address of the puppetmaster
+# $server_ip::                              Bind ip address of the puppetserver
 #
-# $server_port::                            Puppet master port
+# $server_port::                            Puppet server port
 #
 # $server_ca::                              Provide puppet CA
 #
-# $server_ca_crl_sync::                     Sync puppet CA crl file to compile masters, Puppet CA Must be the Puppetserver
-#                                           for the compile masters. Defaults to false.
+# $server_ca_crl_sync::                     Sync puppet CA crl file to compilers, Puppet CA Must be the Puppetserver
+#                                           for the compilers. Defaults to false.
 #
 # $server_crl_enable::                      Turn on crl checking. Defaults to true when server_ca is true. Otherwise
 #                                           Defaults to false. Note unless you are using an external CA. It is recommended
-#                                           to set this to true. See $server_ca_crl_sync to enable syncing from CA Puppet Master
+#                                           to set this to true. See $server_ca_crl_sync to enable syncing from CA Puppet server
 #
-# $server_http::                            Should the puppet master listen on HTTP as well as HTTPS.
+# $server_http::                            Should the puppet server listen on HTTP as well as HTTPS.
 #                                           Useful for load balancer or reverse proxy scenarios. Note that
-#                                           the HTTP puppet master denies access from all clients by default,
+#                                           the HTTP puppet server denies access from all clients by default,
 #                                           allowed clients must be specified with $server_http_allow.
 #
-# $server_http_port::                       Puppet master HTTP port; defaults to 8139.
+# $server_http_port::                       Puppet server HTTP port; defaults to 8139.
 #
-# $server_http_allow::                      Array of allowed clients for the HTTP puppet master. Passed
+# $server_http_allow::                      Array of allowed clients for the HTTP puppet server. Passed
 #                                           to Apache's 'Allow' directive.
 #
-# $server_reports::                         List of report types to include on the puppetmaster
+# $server_reports::                         List of report types to include on the puppetserver
 #
-# $server_implementation::                  Puppet master implementation, either "master" (traditional
+# $server_implementation::                  Puppet server implementation, either "master" (traditional
 #                                           Ruby) or "puppetserver" (JVM-based)
 #
 # $server_passenger::                       If set to true, we will configure apache with
@@ -243,10 +243,10 @@
 #
 # $server_external_nodes::                  External nodes classifier executable
 #
-# $server_template::                        Which template should be used for master
+# $server_template::                        Which template should be used for server
 #                                           configuration
 #
-# $server_main_template::                   Which template should be used for master
+# $server_main_template::                   Which template should be used for server
 #                                           related configuration in the [main] section
 #
 # $server_git_repo::                        Use git repository as a source of modules
@@ -300,9 +300,9 @@
 #
 # $server_ssl_dir::                         SSL directory
 #
-# $server_package::                         Custom package name for puppet master
+# $server_package::                         Custom package name for puppet server
 #
-# $server_version::                         Custom package version for puppet master
+# $server_version::                         Custom package version for puppet server
 #
 # $server_certname::                        The name to use when handling certificates.
 #
@@ -332,9 +332,9 @@
 #                                           apache module included with foreman-installer.
 #
 # $server_service_fallback::                If passenger is not used, do we want to fallback
-#                                           to using the puppetmaster service? Set to false
+#                                           to using the puppetserver service? Set to false
 #                                           if you disabled passenger and you do NOT want to
-#                                           use the puppetmaster service. Defaults to true.
+#                                           use the puppetserver service. Defaults to true.
 #
 # $server_passenger_min_instances::         The PassengerMinInstances parameter. Sets the
 #                                           minimum number of application processes to run.
@@ -345,7 +345,7 @@
 #                                           process during httpd start.
 #
 # $server_passenger_ruby::                  The PassengerRuby parameter. Sets the Ruby
-#                                           interpreter for serving the puppetmaster
+#                                           interpreter for serving the puppetserver
 #                                           rack application.
 #
 # $server_config_version::                  How to determine the configuration version. When
@@ -433,7 +433,7 @@
 # $server_puppetserver_version::            The version of puppetserver 2 installed (or being installed)
 #                                           Unfortunately, different versions of puppetserver need configuring differently,
 #                                           and there's no easy way of determining which version is being installed.
-#                                           Defaults to '2.3.1' but can be overriden if you're installing an older version.
+#                                           Defaults to '5.0.0' but can be overriden if you're installing an older version.
 #
 # $server_max_active_instances::            Max number of active jruby instances. Defaults to
 #                                           processor count
@@ -499,7 +499,7 @@
 #
 #     include puppet
 #
-# * Installing a puppetmaster
+# * Installing a puppetserver
 #
 #   class {'puppet':
 #     server => true,

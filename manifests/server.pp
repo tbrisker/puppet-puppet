@@ -1,6 +1,6 @@
 # == Class: puppet::server
 #
-# Sets up a puppet master.
+# Sets up a puppet server.
 #
 # == puppet::server parameters
 #
@@ -29,39 +29,39 @@
 #
 # $hiera_config::              The hiera configuration file.
 #
-# $user::                      Name of the puppetmaster user.
+# $user::                      Name of the puppetserver user.
 #
-# $group::                     Name of the puppetmaster group.
+# $group::                     Name of the puppetserver group.
 #
 # $dir::                       Puppet configuration directory
 #
-# $ip::                        Bind ip address of the puppetmaster
+# $ip::                        Bind ip address of the puppetserver
 #
-# $port::                      Puppet master port
+# $port::                      Puppet server port
 #
 # $ca::                        Provide puppet CA
 #
 # $ca_crl_filepath::           Path to ca_crl file
 #
-# $ca_crl_sync::               Sync the puppet ca crl to compile masters. Requires compile masters to
-#                              be agents of the CA master (MOM) defaults to false
+# $ca_crl_sync::               Sync the puppet ca crl to compilers. Requires compilers to
+#                              be agents of the CA server (MOM) defaults to false
 #
 # $crl_enable::                Enable CRL processing, defaults to true when $ca is true else defaults
 #                              to false
 #
-# $http::                      Should the puppet master listen on HTTP as well as HTTPS.
+# $http::                      Should the puppet server listen on HTTP as well as HTTPS.
 #                              Useful for load balancer or reverse proxy scenarios. Note that
-#                              the HTTP puppet master denies access from all clients by default,
+#                              the HTTP puppet server denies access from all clients by default,
 #                              allowed clients must be specified with $http_allow.
 #
-# $http_port::                 Puppet master HTTP port; defaults to 8139.
+# $http_port::                 Puppet server HTTP port; defaults to 8139.
 #
-# $http_allow::                Array of allowed clients for the HTTP puppet master. Passed
+# $http_allow::                Array of allowed clients for the HTTP puppet server. Passed
 #                              to Apache's 'Allow' directive.
 #
-# $reports::                   List of report types to include on the puppetmaster
+# $reports::                   List of report types to include on the puppetserver
 #
-# $implementation::            Puppet master implementation, either "master" (traditional
+# $implementation::            Puppet server implementation, either "master" (traditional
 #                              Ruby) or "puppetserver" (JVM-based)
 #
 # $passenger::                 If set to true, we will configure apache with
@@ -124,9 +124,9 @@
 #
 # $ssl_dir::                   SSL directory
 #
-# $package::                   Custom package name for puppet master
+# $package::                   Custom package name for puppet server
 #
-# $version::                   Custom package version for puppet master
+# $version::                   Custom package version for puppet server
 #
 # $certname::                  The name to use when handling certificates.
 #

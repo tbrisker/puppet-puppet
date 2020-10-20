@@ -1,13 +1,13 @@
 [![Puppet Forge](http://img.shields.io/puppetforge/v/theforeman/puppet.svg)](https://forge.puppetlabs.com/theforeman/puppet)
 [![Build Status](https://travis-ci.org/theforeman/puppet-puppet.svg?branch=master)](https://travis-ci.org/theforeman/puppet-puppet)
 
-# Puppet module for installing the Puppet agent and master
+# Puppet module for installing the Puppet agent and server
 
-Installs and configures the Puppet agent and optionally a Puppet master (when
+Installs and configures the Puppet agent and optionally a Puppet server (when
 `server` is true).  Part of the [Foreman installer](http://github.com/theforeman/foreman-installer)
 or to be used as a Puppet module.
 
-The Puppet master is configured under Apache and Passenger by default, unless
+The Puppet server is configured under Apache and Passenger by default, unless
 `server_passenger` is set to false. When using Puppet Labs AIO packages
 (puppet-agent) the JVM-based Puppet Server is installed by default. For Puppet
 3.x based installation, `server_implementation` can be set to `puppetserver`
@@ -47,17 +47,17 @@ Requires [theforeman/git](https://forge.puppetlabs.com/theforeman/git).
 
 With the 3.0.0 release the Foreman integration became optional.  It will still
 by default install the Foreman integration when `server` is true,
-so if you wish to run a Puppet master without Foreman, it can be disabled by
+so if you wish to run a Puppet server without Foreman, it can be disabled by
 setting `server_foreman` to false.
 
 Requires [theforeman/foreman](https://forge.puppetlabs.com/theforeman/foreman).
 
 ## PuppetDB integration
 
-The Puppet master can be configured to export catalogs and reports to a
+The Puppet server can be configured to export catalogs and reports to a
 PuppetDB instance, using the puppetlabs/puppetdb module.  Use its
 `puppetdb::server` class to install the PuppetDB server and this module to
-configure the Puppet master to connect to PuppetDB.
+configure the Puppet server to connect to PuppetDB.
 
 Requires [puppetlabs/puppetdb](https://forge.puppetlabs.com/puppetlabs/puppetdb)
 
@@ -78,7 +78,7 @@ wrapper classes or even your ENC (if it supports param classes). For example:
     # Agent and cron (or daemon):
     class { '::puppet': runmode => 'cron' }
 
-    # Agent and puppetmaster:
+    # Agent and puppetserver:
     class { '::puppet': server => true }
 
     # You want to use git?
@@ -104,7 +104,7 @@ wrapper classes or even your ENC (if it supports param classes). For example:
       server_post_hook_content => 'puppetserver/post-hook.puppet',
     }
 
-    # Configure master without Foreman integration
+    # Configure server without Foreman integration
     class { '::puppet':
       server                => true,
       server_foreman        => false,
@@ -142,10 +142,10 @@ as per the examples above, and the execute _puppet apply_ e.g:
 
 # Advanced scenarios
 
-An HTTP (non-SSL) puppetmaster instance can be set up (standalone or in addition to
+An HTTP (non-SSL) puppetserver instance can be set up (standalone or in addition to
 the SSL instance) by setting the `server_http` parameter to `true`. This is useful for
 reverse proxy or load balancer scenarios where the proxy/load balancer takes care of SSL
-termination. The HTTP puppetmaster instance expects the `X-Client-Verify`, `X-SSL-Client-DN`
+termination. The HTTP puppetserver instance expects the `X-Client-Verify`, `X-SSL-Client-DN`
 and `X-SSL-Subject` HTTP headers to have been set on the front end server.
 
 The listening port can be configured by setting `server_http_port` (which defaults to 8139).
@@ -157,11 +157,11 @@ snippet). Allowed hosts can be configured by setting the `server_http_allow` par
 For puppetserver, this HTTP instance accepts **ALL** connections and no further restrictions can be configured. The
 `server_http_allow` parameter has no effect at all!
 
-**Note that running an HTTP puppetmaster is a huge security risk when improperly
+**Note that running an HTTP puppetserver is a huge security risk when improperly
 configured. Allowed hosts should be tightly controlled; anyone with access to an allowed
 host can access all client catalogues and client certificates.**
 
-    # Configure an HTTP puppetmaster vhost in addition to the standard SSL vhost
+    # Configure an HTTP puppetserver vhost in addition to the standard SSL vhost
     class { '::puppet':
       server               => true,
       server_http          => true,
